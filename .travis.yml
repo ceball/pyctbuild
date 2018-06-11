@@ -60,7 +60,7 @@ jobs:
       - conda config --set always_yes True
       - conda install -c pyviz/label/dev pyctdev && doit ecosystem_setup
     install: doit package_build --test-python=py36 --test-python=py27 --test-group=examples
-    script: doit package_upload --token=$CONDA_UPLOAD_TOKEN --label=dev
+    script: doit package_upload --token=$CONDA_UPLOAD_TOKEN $LABEL
 
   - <<: *conda_default
     stage: conda_package

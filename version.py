@@ -526,3 +526,18 @@ class Version(object):
 
 def get_setup_version(reponame, pkgname=None):
     return Version.setup_version(os.path.dirname(__file__),reponame,pkgname=pkgname,archive_commit="$Format:%h$")
+
+
+########## CB put here; everything above is autover master ##########
+
+def get_setup_version2():
+    import configparser # py2 also?
+    config = configparser.ConfigParser()
+    config.read("setup.cfg")
+    pkgname = None
+    reponame = config['tool:autover']['reponame']
+    if 'pkgname' in config['tool:autover']:
+        pkgname = config['tool:autover']['pkgname']
+
+    # TODO: is this right? or I need the other stuff from projects' get_setup_version()?
+    return Version.setup_version(os.path.dirname(__file__),reponame,pkgname=pkgname,archive_commit="$Format:%h$")
